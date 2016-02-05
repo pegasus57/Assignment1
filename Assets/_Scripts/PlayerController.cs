@@ -2,14 +2,14 @@
 using System.Collections;
 
 
-
-
 public class PlayerController : MonoBehaviour {
+
     // PUBLIC INSTANCE VARIABLES
     public float speed = 7f;
 
     // PRIVATE INSTANCE VARIABLES
     private float _playerInput;
+    private float _playerInput2;
     private Transform _transform;
     private Vector2 _currentPosition;
 
@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour {
         this._currentPosition = this._transform.position;
 
         this._playerInput = Input.GetAxis("Horizontal");
+        this._playerInput2 = Input.GetAxis("Vertical");
         // if player input is positive move right 
         if (this._playerInput > 0)
         {
@@ -36,6 +37,27 @@ public class PlayerController : MonoBehaviour {
         {
             this._currentPosition -= new Vector2(this.speed, 0);
         }
+
+        // if player input is positive move up 
+        if (this._playerInput2 > 0)
+        {
+            this._currentPosition += new Vector2(0,this.speed);
+        }
+
+        // if player input is negative move down 
+        if (this._playerInput2 < 0)
+        {
+            this._currentPosition -= new Vector2(0,this.speed);
+        }
+
+
+
+
+
+
+
+
+
 
         this._checkBounds();
 
@@ -56,6 +78,14 @@ public class PlayerController : MonoBehaviour {
         {
             this._currentPosition.x = 290;
         }
+        if (this._currentPosition.y < -200)
+        {
+            this._currentPosition.y = -200;
+        }
+
+        if (this._currentPosition.y > 200)
+        {
+            this._currentPosition.y = 200;
+        }
     }
-    
 }
